@@ -34,3 +34,4 @@
 # Cache
 *.tmp
 *.log
+*.vscode
