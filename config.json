@@ -1,0 +1,168 @@
+{
+  "PhysicsConfig": {
+    "simulation": {
+      "name": "AsterCore Physics",
+      "version": "1.0.0",
+      "description": "Configuration for AsterCore Physics Engine",
+      "author": "ImBad/Neofilisoft",
+      "timestamp": "2023-11-15T10:30:00Z"
+    },
+    "world": {
+      "gravity": {
+        "x": 0.0,
+        "y": -9.8,
+        "z": 0.0
+      },
+      "globalForces": [
+        {
+          "name": "wind",
+          "direction": {
+            "x": 0.5,
+            "y": 0.0,
+            "z": 0.2
+          },
+          "magnitude": 0.3
+        }
+      ],
+      "collisionDetection": {
+        "broadphase": "SAP",
+        "narrowphase": "GJK-EPA",
+        "collisionIterations": 10,
+        "penetrationThreshold": 0.01,
+        "restitutionThreshold": 0.5
+      },
+      "solver": {
+        "type": "XPBD",
+        "iterations": 10,
+        "damping": 0.2,
+        "stiffness": 0.8
+      }
+    },
+    "materials": [
+      {
+        "id": 1,
+        "name": "rubber",
+        "density": 1.2,
+        "restitution": 0.8,
+        "friction": 0.6,
+        "color": "#FF5722"
+      },
+      {
+        "id": 2,
+        "name": "metal",
+        "density": 7.8,
+        "restitution": 0.3,
+        "friction": 0.1,
+        "color": "#5C6F78"
+      },
+      {
+        "id": 3,
+        "name": "wood",
+        "density": 0.7,
+        "restitution": 0.5,
+        "friction": 0.4,
+        "color": "#913113"
+      }
+    ],
+    "objects": [
+      {
+        "id": "ground",
+        "type": "box",
+        "position": {
+          "x": 0.0,
+          "y": -2.0,
+          "z": 0.0
+        },
+        "dimensions": {
+          "width": 10.0,
+          "height": 1.0,
+          "depth": 10.0
+        },
+        "material": "metal",
+        "isStatic": true,
+        "collision": true,
+        "render": {
+          "texture": "metal_plate_diffuse.jpg",
+          "normalMap": "metal_plate_normal.jpg"
+        }
+      },
+      {
+        "id": "sphere1",
+        "type": "sphere",
+        "position": {
+          "x": 0.0,
+          "y": 5.0,
+          "z": 0.0
+        },
+        "radius": 1.0,
+        "material": "rubber",
+        "mass": 1.5,
+        "initialVelocity": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "collision": true,
+        "render": {
+          "color": "#597CF0",
+          "shininess": 32.0
+        }
+      },
+      {
+        "id": "cube1",
+        "type": "box",
+        "position": {
+          "x": 2.0,
+          "y": 8.0,
+          "z": 0.0
+        },
+        "dimensions": {
+          "width": 1.0,
+          "height": 1.0,
+          "depth": 1.0
+        },
+        "material": "wood",
+        "mass": 2.0,
+        "initialVelocity": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "collision": true,
+        "render": {
+          "texture": "wood_grain_diffuse.jpg",
+          "roughness": 0.7
+        }
+      }
+    ],
+    "gpuSettings": {
+      "enabled": true,
+      "maxParticles": 10000,
+      "computeShaders": {
+        "collisionDetection": "collision_cs.glsl",
+        "constraintSolver": "solver_cs.glsl"
+      },
+      "bufferSize": 256,
+      "asyncCompute": true
+    },
+    "simulationParameters": {
+      "timeStep": 0.016,
+      "maxSubSteps": 5,
+      "fps": 120,
+      "enableSleeping": true,
+      "sleepThreshold": 0.1,
+      "warmStarting": true,
+      "continuousCollisionDetection": true
+    },
+    "debug": {
+      "drawCollisionShapes": true,
+      "drawContactPoints": true,
+      "drawAABBs": true,
+      "drawConstraints": true,
+      "statsOutput": {
+        "frequency": 90,
+        "outputFile": "physics_stats.log"
+      }
+    }
+  }
+}
